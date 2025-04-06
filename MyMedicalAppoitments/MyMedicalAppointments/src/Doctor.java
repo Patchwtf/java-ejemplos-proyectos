@@ -4,6 +4,7 @@ public class Doctor {
     //Propiedades
     static int id = 0; //autoincrement
     String name;
+    String email;
     String speciality;
 
     //Constructor

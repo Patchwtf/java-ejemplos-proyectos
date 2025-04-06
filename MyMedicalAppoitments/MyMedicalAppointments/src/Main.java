@@ -17,5 +17,8 @@ public class Main {
         //*implementacion de sobre carga y pasarle variables al instancias objetos */
         Doctor myDoctor = new Doctor("Parche", "Neuro");
         System.err.println(myDoctor.name + "\t" + myDoctor.speciality);
+
+        Patient patient = new Patient("Alex", "nobody@mail.com");
+        
     }
 }
