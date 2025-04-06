@@ -10,7 +10,12 @@ public class Main {
 
         // Doctor myDoctorAnn = new Doctor();
         // myDoctorAnn.showId();
+        
+        //?Implementacion de menu
+        //showMenu();
 
-        showMenu();
+        //*implementacion de sobre carga y pasarle variables al instancias objetos */
+        Doctor myDoctor = new Doctor("Parche", "Neuro");
+        System.err.println(myDoctor.name + "\t" + myDoctor.speciality);
     }
 }

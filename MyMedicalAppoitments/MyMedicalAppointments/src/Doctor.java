@@ -14,6 +14,11 @@ public class Doctor {
 
     Doctor(){
         System.out.println("Contructor Doctor() called");
+            }
+    Doctor(String name, String speciality) {
+        System.out.println("El nombre asignado al doctor es: " + name);
+        this.name = name;
+        this.speciality = speciality;
         id++;
     }
 
