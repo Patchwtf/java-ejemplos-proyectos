@@ -2,6 +2,9 @@
 
 import java.util.Date;
 
+import model.Doctor;
+import model.Patient;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -21,7 +24,6 @@ public class Main {
         myDoctor.addAvailableAppointment(new Date(), "1 pm");
         System.out.println("=============================================================");
         System.out.println(myDoctor.getAvailableAppointments().get(1));
-
         for (Doctor.AvaibleAppointments avaibleAppointments : myDoctor.getAvailableAppointments()) {
             System.out.println(avaibleAppointments.getDate() + " " + avaibleAppointments.getTime());
         }
@@ -29,7 +31,6 @@ public class Main {
         //System.out.println(myDoctor.name + "\t" + myDoctor.speciality);
         Patient patient = new Patient("Alex", "nobody@mail.com");
         patient.setWeight(70.0);
-
         patient.setPhoneNumber("1234567890");
         System.out.println(patient.getPhoneNumber());
         System.out.println("=============================================================");

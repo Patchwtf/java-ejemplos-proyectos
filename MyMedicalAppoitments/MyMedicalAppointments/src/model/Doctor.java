@@ -1,3 +1,4 @@
+package model;
 
 import java.util.*;
 
@@ -14,7 +15,7 @@ public class Doctor extends User {
     // Doctor() {
     //     System.out.println("Contructor Doctor() called");
     // }
-    Doctor(String name, String email, String speciality) {
+    public Doctor(String name, String email, String speciality) {
         super(name, email);
         System.out.println("El nombre asignado al doctor es: " + name);
         this.speciality = speciality;
