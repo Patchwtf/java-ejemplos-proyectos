@@ -15,12 +15,12 @@ public class Main {
         //?Implementacion de menu
         //showMenu();
         //*implementacion de sobre carga y pasarle variables al instancias objetos */
-        Doctor myDoctor = new Doctor("Parche", "Neuro");
+        Doctor myDoctor = new Doctor("Parche", "partche@mail.com", "Neuro");
         myDoctor.addAvailableAppointment(new Date(), "4 pm");
         myDoctor.addAvailableAppointment(new Date(), "10 pm");
         myDoctor.addAvailableAppointment(new Date(), "1 pm");
 
-        System.out.println(myDoctor.getAvailableAppointments());
+        System.out.println(myDoctor.getAvailableAppointments().get(1));
 
         for (Doctor.AvaibleAppointments avaibleAppointments : myDoctor.getAvailableAppointments()) {
             System.out.println(avaibleAppointments.getDate() + " " + avaibleAppointments.getTime());

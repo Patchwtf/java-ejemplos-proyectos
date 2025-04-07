@@ -1,37 +1,33 @@
 
 import java.util.*;
 
-public class Doctor {
+public class Doctor extends User {
 
-    //Propiedades
-    static int id = 0; //autoincrement
-    private String name;
-    private String email;
     private String speciality;
 
+    //Propiedades
     //Constructor
     // Doctor(String name, String speciality) {
     //     this.name = name;
     //     this.speciality = speciality;
     // }
-    Doctor() {
-        System.out.println("Contructor Doctor() called");
-    }
-
-    Doctor(String name, String speciality) {
+    // Doctor() {
+    //     System.out.println("Contructor Doctor() called");
+    // }
+    Doctor(String name, String email, String speciality) {
+        super(name, email);
         System.out.println("El nombre asignado al doctor es: " + name);
-        this.name = name;
         this.speciality = speciality;
-        id++;
+        System.out.println("La especialidad del doctor es: " + speciality);
     }
 
     //Comportamientos - Metodos
-    public void showName() {
-        System.out.println("Doctor name: " + name);
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void showId() {
-        System.out.println("Doctor id: " + id);
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     public ArrayList<AvaibleAppointments> getAvailableAppointments() {
