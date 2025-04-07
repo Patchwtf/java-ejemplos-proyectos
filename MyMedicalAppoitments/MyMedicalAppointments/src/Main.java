@@ -29,10 +29,10 @@ public class Main {
         //System.err.println(myDoctor.name + "\t" + myDoctor.speciality);
         Patient patient = new Patient("Alex", "nobody@mail.com");
         patient.setWeight(70.0);
-        System.err.println(patient.getWeight());
 
         patient.setPhoneNumber("1234567890");
         System.err.println(patient.getPhoneNumber());
 
+        System.out.println(patient);
     }
 }

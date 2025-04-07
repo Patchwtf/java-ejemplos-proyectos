@@ -46,4 +46,9 @@ public class User {
             System.out.println("El telefono no es valido");
         }
     }
+
+    @Override
+    public String toString() {
+        return "User: \nNombre: " + name + "\nEmail: " + email + "\nDireccion: " + address + "\nTelefono: " + phoneNumber;
+    }
 }

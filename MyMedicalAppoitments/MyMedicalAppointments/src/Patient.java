@@ -43,4 +43,8 @@ public class Patient extends User {
         return this.birthday;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "\nFecha de nacimiento: " + birthday + "\nPeso: " + getWeight() + "\nAltura: " + getHeight() + "\nTipo de sangre: " + blood;
+    }
 }
