@@ -40,6 +40,10 @@ public class Doctor extends User {
         availableAppointments.add(new AvaibleAppointments(date, time));
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "\nEspecialidad: " + speciality + "\nAvailable: " + availableAppointments.toString();
+    }
     public static class AvaibleAppointments {
 
         private int id;
@@ -75,5 +79,9 @@ public class Doctor extends User {
         public void setTime(String time) {
             this.time = time;
         }
+        @Override
+        public String toString() {
+            return "Available Appointments: \nDate " + date + "\nTime: " + time;}
     }
+
 }
