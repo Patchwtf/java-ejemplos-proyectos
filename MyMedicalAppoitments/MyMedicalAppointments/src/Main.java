@@ -42,5 +42,17 @@ public class Main {
         // User user = new Doctor("Ignacio", "ignacio@mail.com");
         // user.showDatauser();
         // System.out.println("=============================================================");
+
+        User user1 = new User("Lalo", "lalo@mail.com"){
+            @Override
+            public void showDatauser() {
+                System.out.println("Doctor\n" + "Nombre: " + getName() );
+            }
+        };
+
+        user1.showDatauser();
+        System.out.println("=============================================================");
+
+        
     }
 }
