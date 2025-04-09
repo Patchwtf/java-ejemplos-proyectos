@@ -1,9 +1,9 @@
 //import static ui.UIMenu.*;
 
 import java.util.Date;
-
 import model.Doctor;
 import model.Patient;
+import model.User;
 
 public class Main {
 
@@ -38,5 +38,9 @@ public class Main {
         System.out.println("=============================================================");
         System.out.println(myDoctor);
         System.out.println("=============================================================");
+
+        // User user = new Doctor("Ignacio", "ignacio@mail.com");
+        // user.showDatauser();
+        // System.out.println("=============================================================");
     }
 }
