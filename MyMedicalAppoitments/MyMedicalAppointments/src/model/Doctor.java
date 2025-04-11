@@ -1,5 +1,7 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Doctor extends User {
@@ -37,7 +39,8 @@ public class Doctor extends User {
 
     ArrayList<AvaibleAppointments> availableAppointments = new ArrayList<>();
 
-    public void addAvailableAppointment(Date date, String time) {
+    public void addAvailableAppointment(String date, String time) {
+
         availableAppointments.add(new AvaibleAppointments(date, time));
     }
 
@@ -56,10 +59,15 @@ public class Doctor extends User {
         private int id;
         private Date date;
         private String time;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         //Avaible appointment
-        public AvaibleAppointments(Date date, String time) {
-            this.date = date;
+        public AvaibleAppointments(String date, String time) {
+            try {
+                this.date = format.parse(date);
+            } catch (ParseException e) {
+                System.out.println("Error parsing date: " + e.getMessage());
+            }
             this.time = time;
         }
 
@@ -73,6 +81,10 @@ public class Doctor extends User {
 
         public Date getDate() {
             return date;
+        }
+
+        public String getDate(String date) {
+            return format.format(date);
         }
 
         public void setDate(Date date) {
