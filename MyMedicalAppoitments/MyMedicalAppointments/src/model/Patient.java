@@ -1,11 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Patient extends User {
 
     private String birthday;
     private double weight;
     private double height;
     private String blood;
+
+    private ArrayList <AppointmentDoctor> appointmentsDoctor = new ArrayList<>();
+    private ArrayList <AppointmentNurse> appointmentsNurse = new ArrayList<>();
+
+    
 
     public Patient(String name, String email) {
         super(name, email);
@@ -52,5 +60,23 @@ public class Patient extends User {
     @Override
     public void showDatauser() {
         System.out.println("Paciente: " + getName() + "\nEmail: " + getEmail() + "\nTelefono: " + getPhoneNumber() + "\nFecha de nacimiento: " + birthday + "\nPeso: " + getWeight() + "\nAltura: " + getHeight() + "\nTipo de sangre: " + blood);
+    }
+
+    public ArrayList<AppointmentDoctor> getAppointmentsDoctor() {
+        return appointmentsDoctor;
+    }
+
+    public void addAppointmentsDoctor(Doctor doctor, Date date, String time) {
+        AppointmentDoctor appointmentDoctor = new AppointmentDoctor(this, doctor);
+        appointmentDoctor.schedule(date, time);
+        appointmentsDoctor.add(appointmentDoctor);
+    }
+
+    public ArrayList<AppointmentNurse> getAppointmentsNurse() {
+        return appointmentsNurse;
+    }
+
+    public void setAppointmentsNurse(ArrayList<AppointmentNurse> appointmentsNurse) {
+        this.appointmentsNurse = appointmentsNurse;
     }
 }
