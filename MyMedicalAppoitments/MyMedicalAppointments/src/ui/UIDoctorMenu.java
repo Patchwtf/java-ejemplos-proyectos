@@ -24,6 +24,7 @@ public class UIDoctorMenu {
                 case 1:
                     // Add available appointment
                     System.out.println("Add available appointment");
+                    showAddAvailableAppointmentMenu();
                     break;
                 case 2:
                     // My scheduled appointments
@@ -57,6 +58,7 @@ public class UIDoctorMenu {
 
             Scanner scanner = new Scanner(System.in);
             response = scanner.nextInt();
+            scanner.nextLine();
 
             if (response > 0 && response < 4) {
                 int monthSelected = response;
@@ -69,7 +71,7 @@ public class UIDoctorMenu {
 
                 int responseDate = Integer.parseInt(scanner.nextLine());
 
-                if (responseDate == 1) {
+                if (responseDate == 2) {
                     continue;
                 }
 
@@ -82,7 +84,7 @@ public class UIDoctorMenu {
                     System.out.println("Your time is: " + time + "\n1. Correct\n2. Change Time");
                     responseTime = Integer.parseInt(scanner.nextLine());
 
-                } while (responseTime == 1);
+                } while (responseTime == 2);
 
                 UIMenu.doctorLogged.addAvailableAppointment(date, time);
                 checkDoctorAvailableAppointments(UIMenu.doctorLogged);

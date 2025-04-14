@@ -70,6 +70,7 @@ public class UIMenu {
                     if (d.getEmail().equals(email)) {
                         emailCorrect = true;
                         doctorLogged = d;
+                        UIDoctorMenu.showDoctorMenu();
 
                     }
                 }
