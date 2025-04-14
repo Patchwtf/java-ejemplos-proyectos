@@ -19,7 +19,7 @@ public class UIPatientMenu {
             System.out.println("Welcome: " + UIMenu.patienLogged.getName());
             System.out.println("1. Book an appointment");
             System.out.println("2. View my appointments");
-            System.out.println("3. Logout");
+            System.out.println("0. Logout");
 
             Scanner sc = new Scanner(System.in);
             response = sc.nextInt();
@@ -49,6 +49,7 @@ public class UIPatientMenu {
     private static void showBookAppointmentMenu() {
         int response = 0;
         do {
+            System.out.println(UIMenu.doctorLogged.getAvailableAppointments());
             System.out.println("::Book an appointment::");
             System.out.println("Select a date:");
 
@@ -59,6 +60,7 @@ public class UIPatientMenu {
             for (int i = 0; i < UIDoctorMenu.doctorsAvailableAppointments.size(); i++) {
                 ArrayList<Doctor.AvaibleAppointments> avaibleAppointments
                         = UIDoctorMenu.doctorsAvailableAppointments.get(i).getAvailableAppointments();
+                        
                 Map<Integer, Doctor> doctorAppointments = new TreeMap<>();
 
                 for (int j = 0; j < avaibleAppointments.size(); j++) {

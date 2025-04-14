@@ -87,6 +87,7 @@ public class UIDoctorMenu {
                 } while (responseTime == 2);
 
                 UIMenu.doctorLogged.addAvailableAppointment(date, time);
+                System.out.println(UIMenu.doctorLogged.getAvailableAppointments());
                 checkDoctorAvailableAppointments(UIMenu.doctorLogged);
 
             } else if (response == 0) {
@@ -96,7 +97,7 @@ public class UIDoctorMenu {
     }
 
     private static void checkDoctorAvailableAppointments(Doctor doctor) {
-        if (doctor.getAvailableAppointments().isEmpty() && !doctorsAvailableAppointments.contains(doctor)) {
+        if (doctor.getAvailableAppointments().size() > 0 && !doctorsAvailableAppointments.contains(doctor)) {
             doctorsAvailableAppointments.add(doctor);
         }
     }
