@@ -1,82 +1,61 @@
 package org.example.repository;
 
-public class EmployeeRepository {
-    private Integer id;
-    private String first_name;
-    private String pa_surname;
-    private String ma_surname;
-    private String email;
-    private Float salary;
+import org.example.model.Employee;
+import org.example.util.DataBaseConnection;
 
-    public EmployeeRepository() {
-    }
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    public EmployeeRepository(Integer id, String first_name, String pa_surname, String ma_surname, String email, Float salary) {
-        this.id = id;
-        this.first_name = first_name;
-        this.pa_surname = pa_surname;
-        this.ma_surname = ma_surname;
-        this.email = email;
-        this.salary = salary;
-    }
+public class EmployeeRepository implements  Repository<Employee>{
 
-    public Integer getId() {
-        return id;
-    }
+    private Connection getConnection() throws SQLException {
+        return DataBaseConnection.getIntance();
+    };
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getPa_surname() {
-        return pa_surname;
-    }
-
-    public void setPa_surname(String pa_surname) {
-        this.pa_surname = pa_surname;
-    }
-
-    public String getMa_surname() {
-        return ma_surname;
-    }
-
-    public void setMa_surname(String ma_surname) {
-        this.ma_surname = ma_surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Float getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Float salary) {
-        this.salary = salary;
+    @Override
+    public List<Employee> findAll() throws SQLException {
+        List<Employee> employees = new ArrayList<>();
+        try(Statement myStamt = getConnection().createStatement();
+            ResultSet myRes = myStamt.executeQuery("SELECT * FROM employees");){
+            while(myRes.next()){
+                employees.add(createEmployee(myRes));
+            }
+            return employees;
+        }
     }
 
     @Override
-    public String toString() {
-        return "EmployeeRepository{" +
-                "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", pa_surname='" + pa_surname + '\'' +
-                ", ma_surname='" + ma_surname + '\'' +
-                ", email='" + email + '\'' +
-                ", salary=" + salary +
-                '}';
+    public Employee getById(Integer id) throws SQLException {
+        Employee employee = null;
+        try(PreparedStatement myStamt = getConnection().prepareStatement("SELECT * FROM employees WHERE ID = ?");
+        ){
+            myStamt.setInt(1, id);
+            try(ResultSet myRes = myStamt.executeQuery();){
+                if(myRes.next())employee = createEmployee(myRes);
+            }
+            return employee;
+        }
+    }
+
+    @Override
+    public void save(Employee employee) {
+
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+    }
+
+    private static Employee createEmployee(ResultSet myRes) throws SQLException {
+        Employee e = new Employee();
+        e.setId(myRes.getInt("id"));
+        e.setFirst_name(myRes.getString("first_name"));
+        e.setPa_surname(myRes.getString("p_surname"));
+        e.setMa_surname(myRes.getString("a_surname"));
+        e.setEmail(myRes.getString("email"));
+        e.setSalary(myRes.getFloat("salary"));
+        return e;
     }
 }
