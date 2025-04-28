@@ -8,7 +8,7 @@ public class DataBaseConnection {
     private static String user ="root";
     private static String password = "12345";
     private static Connection myConn;
-    public static Connection main(String[] args) throws SQLException {
+    public static Connection getIntance() throws SQLException {
         if(myConn == null){
             myConn = DriverManager.getConnection(url, user, password);
         }
