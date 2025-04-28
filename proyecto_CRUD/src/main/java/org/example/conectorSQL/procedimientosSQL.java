@@ -5,98 +5,65 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class procedimientosSQL {
-    public static void consultaInicial(HashMap<String,String> conexion) throws SQLException {
-        Connection myConn = null;
-        Statement myStamt = null;
-        ResultSet myRes = null;
-        try{
-            myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+    public static void consultaInicial(HashMap<String,String> conexion) {
+        try(Connection myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+            Statement myStamt = myConn.createStatement();
+            ResultSet myRes = myStamt.executeQuery(conexion.get("query"));){
+
             System.out.println("Genial, nos conectamos");
-            myStamt = myConn.createStatement();
-            myRes = myStamt.executeQuery(conexion.get("query"));
             while(myRes.next()){
                 System.out.println(myRes.getString("first_name") + "\t" + myRes.getString("email"));
             }
-            myConn.close();
         } catch (SQLException e){
             System.out.println("Ni modos, algo salió mal \n" + e.getLocalizedMessage() + " | Error Code:" + e.getErrorCode());
-        } finally {
-            if(myRes != null)myRes.close();
-            if(myStamt != null)myStamt.close();
-            if(myConn != null)myConn.close();
         }
     }
 
-    public static void insercionDatos(HashMap<String,String> conexion, HashMap<String,String> empleado) throws SQLException {
-        Connection myConn = null;
-        PreparedStatement myStamt = null;
-        ResultSet myRes = null;
-        try{
-            myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+    public static void insercionDatos(HashMap<String,String> conexion, HashMap<String,String> empleado) {
+        try(Connection myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+            PreparedStatement myStamt = myConn.prepareStatement(conexion.get("query"));){
             System.out.println("Genial, nos conectamos");
-            myStamt = myConn.prepareStatement(conexion.get("query"));
             myStamt.setString(1, empleado.get("nombre"));
             myStamt.setString(2, empleado.get("apellidoP"));
             myStamt.setString(3, empleado.get("apellidoM"));
             myStamt.setString(4, empleado.get("mail"));
-            if(!Objects.isNull(empleado.get("salary"))) {
-                myStamt.setDouble(5, Double.parseDouble(empleado.get("salary")));
+            if(empleado.get("salary") != null && !empleado.get("salary").isEmpty()) {
+                try {
+                    myStamt.setDouble(5, Double.parseDouble(empleado.get("salary")));
+                } catch (NumberFormatException e) {
+                    myStamt.setNull(5, Types.DOUBLE);
+                }
             } else {
-                myStamt.setString(5,null);
+                myStamt.setNull(5, Types.DOUBLE);
             }
-
             int rowsAffected = myStamt.executeUpdate();
-
             if(rowsAffected>0) System.out.println("Se ha creado un nuevo empleado");
-            myConn.close();
         } catch (SQLException e){
             System.out.println("Ni modos, algo salió mal \n" + e.getLocalizedMessage() + " | Error Code:" + e.getErrorCode());
-        }finally {
-            if(myRes != null)myRes.close();
-            if(myStamt != null)myStamt.close();
-            if(myConn != null)myConn.close();
         }
     }
 
-    public static void actualizacionDatos(HashMap<String,String> conexion) throws SQLException {
-        Connection myConn = null;
-        Statement myStamt = null;
-        ResultSet myRes = null;
-        try{
-            myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+    public static void actualizacionDatos(HashMap<String,String> conexion) {
+        try(Connection myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+            Statement myStamt = myConn.createStatement();
+            ResultSet myRes = myStamt.executeQuery("SELECT * FROM employees");){
             System.out.println("Genial, nos conectamos");
-            myStamt = myConn.createStatement();
             int rowsAffected = myStamt.executeUpdate(conexion.get("query"));
-            myRes = myStamt.executeQuery("SELECT * FROM employees");
             while(myRes.next()) System.out.println(myRes.getString("first_name") +"\t"+ myRes.getString("email"));
-            myConn.close();
         } catch (SQLException e){
             System.out.println("Ni modos, algo salió mal \n" + e.getLocalizedMessage() + " | Error Code:" + e.getErrorCode());
-        }finally {
-            if(myRes != null)myRes.close();
-            if(myStamt != null)myStamt.close();
-            if(myConn != null)myConn.close();
         }
     }
 
-    public static void eliminacionDatos(HashMap<String,String> conexion) throws SQLException {
-        Connection myConn = null;
-        Statement myStamt = null;
-        ResultSet myRes = null;
-        try{
-            myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+    public static void eliminacionDatos(HashMap<String,String> conexion) {
+        try(Connection myConn = DriverManager.getConnection(conexion.get("link"), conexion.get("user"), conexion.get("pwd"));
+            Statement myStamt = myConn.createStatement();
+            ResultSet myRes = myStamt.executeQuery("SELECT * FROM employees");){
             System.out.println("Genial, nos conectamos");
-            myStamt = myConn.createStatement();
             int rowsAffected = myStamt.executeUpdate(conexion.get("query"));
-            myRes = myStamt.executeQuery("SELECT * FROM employees");
             while(myRes.next()) System.out.println(myRes.getString("first_name") +"\t"+ myRes.getString("email"));
-            myConn.close();
         } catch (SQLException e){
             System.out.println("Ni modos, algo salió mal \n" + e.getLocalizedMessage() + " | Error Code:" + e.getErrorCode());
-        }finally {
-            if(myRes != null)myRes.close();
-            if(myStamt != null)myStamt.close();
-            if(myConn != null)myConn.close();
         }
     }
 }
