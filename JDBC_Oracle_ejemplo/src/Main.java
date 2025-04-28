@@ -19,22 +19,23 @@ public class Main {
                 put("query", "");
             }
         };
-        HashMap<String, String> empleado = new HashMap<>(2){{put("nombre","");put("apellido","");}};
+        HashMap<String, String> empleado = new HashMap<>(2){{put("nombre",null);put("apellidoP",null);put("apellidoM",null);put("mail",null);put("salary",null);}};
 
         //Primer consulta
         datos.put("query", "SELECT * FROM employees");
         consultaInicial(datos);
 
-        //Consulta compleja
-        datos.put("query","INSERT INTO employees (first_name, pa_surname) values (?,?)");
+        //Insercion de registro
+        System.out.println("################################");
+        datos.put("query","INSERT INTO employees (first_name,pa_surname,ma_surname,email,salary) values (?,?,?,?,?)");
         empleado.put("nombre","Rosalda");
-        empleado.put("apellido","Ramirez");
+        empleado.put("apellidoP","Ramirez");
         insercionDatos(datos, empleado);
-
         datos.put("query", "SELECT * FROM employees");
         consultaInicial(datos);
 
+        //Eliminacion de registro
+        System.out.println("################################");
+
     }
-
-
 }

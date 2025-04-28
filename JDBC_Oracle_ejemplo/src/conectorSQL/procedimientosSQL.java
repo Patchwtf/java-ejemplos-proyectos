@@ -2,6 +2,7 @@ package conectorSQL;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class procedimientosSQL {
     public static void consultaInicial(HashMap<String,String> conexion){
@@ -31,7 +32,14 @@ public class procedimientosSQL {
             System.out.println("Genial, nos conectamos");
             myStamt = myConn.prepareStatement(conexion.get("query"));
             myStamt.setString(1, empleado.get("nombre"));
-            myStamt.setString(2, empleado.get("apellido"));
+            myStamt.setString(2, empleado.get("apellidoP"));
+            myStamt.setString(3, empleado.get("apellidoM"));
+            myStamt.setString(4, empleado.get("mail"));
+            if(!Objects.isNull(empleado.get("salary"))) {
+                myStamt.setDouble(5, Double.parseDouble(empleado.get("salary")));
+            } else {
+                myStamt.setString(5,null);
+            }
 
             int rowsAffected = myStamt.executeUpdate();
 
