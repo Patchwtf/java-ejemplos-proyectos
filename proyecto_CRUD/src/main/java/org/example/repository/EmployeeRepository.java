@@ -52,8 +52,8 @@ public class EmployeeRepository implements  Repository<Employee>{
         Employee e = new Employee();
         e.setId(myRes.getInt("id"));
         e.setFirst_name(myRes.getString("first_name"));
-        e.setPa_surname(myRes.getString("p_surname"));
-        e.setMa_surname(myRes.getString("a_surname"));
+        e.setPa_surname(myRes.getString("pa_surname"));
+        e.setMa_surname(myRes.getString("ma_surname"));
         e.setEmail(myRes.getString("email"));
         e.setSalary(myRes.getFloat("salary"));
         return e;
