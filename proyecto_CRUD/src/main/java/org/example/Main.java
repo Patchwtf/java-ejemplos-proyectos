@@ -6,12 +6,6 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        HashMap<String, String> datos = new HashMap<>(4) {
-            {
-                put("link", "jdbc:mysql://localhost:3306/project");
-                put("user", "root");
-                put("pwd", "12345");
-                put("query", "");
-            }};
+
     }
 }
