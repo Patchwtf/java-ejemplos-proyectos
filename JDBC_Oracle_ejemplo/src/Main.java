@@ -26,16 +26,22 @@ public class Main {
         consultaInicial(datos);
 
         //Insercion de registro
-        System.out.println("################################");
+        System.out.println("################################\nInsercion");
         datos.put("query","INSERT INTO employees (first_name,pa_surname,ma_surname,email,salary) values (?,?,?,?,?)");
         empleado.put("nombre","Rosalda");
         empleado.put("apellidoP","Ramirez");
         insercionDatos(datos, empleado);
+
         datos.put("query", "SELECT * FROM employees");
         consultaInicial(datos);
 
-        //Eliminacion de registro
-        System.out.println("################################");
+        //Actualizacion y eliminacion de registro
+        System.out.println("################################\n!!Actualizacion!! & Eliminacion");
+        datos.put("query", "UPDATE employees SET email = 'rosa@mail.com' where first_name = 'Rosalda'");
+        actualizacionDatos(datos);
+        System.out.println("################################\nActualizacion & !!Eliminacion!!");
+        datos.put("query", "DELETE from employees where first_name = 'Rosalda'");
+        actualizacionDatos(datos);
 
     }
 }
