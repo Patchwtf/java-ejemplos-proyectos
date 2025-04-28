@@ -1,4 +1,4 @@
 package org.example.repository;
 
-public interface Reporitory {
+public interface Repository {
 }
