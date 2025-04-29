@@ -17,6 +17,17 @@ public class Main {
         try (Connection myConn = DataBaseConnection.getIntance();){
             Repository<Employee> repository = new EmployeeRepository();
             repository.findAll().forEach(System.out::println);
+            System.out.println("\n" + repository.getById(5));
+
+            System.out.println("\nInsertando empleado\n");
+            Employee employee = new Employee();
+            employee.setFirst_name("Miles");
+            employee.setPa_surname("Morales");
+            employee.setMa_surname("Rivera");
+            employee.setEmail("miles@mail.com");
+            employee.setSalary(5000.99f);
+            repository.save(employee);
+            repository.findAll().forEach(System.out::println);
         }
     }
 }
