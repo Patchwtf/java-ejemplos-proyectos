@@ -40,20 +40,31 @@ public class EmployeeRepository implements  Repository<Employee>{
 
     @Override
     public void save(Employee employee) throws SQLException {
-        String sql = "INSERT INTO employees (first_name, pa_surname, ma_surname, email, salary) values (?,?,?,?,?)";
+        String sql;
+        if (employee.getId() != null && employee.getId() > 0){
+            sql = "UPDATE employees set first_name = ?, pa_surname = ?, ma_surname = ?, email = ?, salary = ? where id = ?";
+        } else {
+             sql = "INSERT INTO employees (first_name, pa_surname, ma_surname, email, salary) values (?,?,?,?,?)";
+        }
         try (PreparedStatement myStamt = getConnection().prepareStatement(sql)){
             myStamt.setString(1, employee.getFirst_name());
             myStamt.setString(2, employee.getPa_surname());
             myStamt.setString(3, employee.getMa_surname());
             myStamt.setString(4, employee.getEmail());
             myStamt.setFloat(5, employee.getSalary());
+            if (employee.getId() != null && employee.getId() > 0) myStamt.setInt(6, employee.getId());
             myStamt.executeUpdate();
+            System.out.println("Se insertó/actualizó el usuario " + employee.getFirst_name());
         }
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer id) throws SQLException {
+        try(PreparedStatement myStamt = getConnection().prepareStatement("DELETE FROM employees where id = ?")){
+            myStamt.setInt(1, id);
+            myStamt.executeUpdate();
 
+        }
     }
 
     private static Employee createEmployee(ResultSet myRes) throws SQLException {

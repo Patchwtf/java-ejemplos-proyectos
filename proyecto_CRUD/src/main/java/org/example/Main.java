@@ -28,6 +28,17 @@ public class Main {
             employee.setSalary(5000.99f);
             repository.save(employee);
             repository.findAll().forEach(System.out::println);
+
+            System.out.println("\nActualizacion empleado\n");
+            employee.setId(6);
+            employee.setMa_surname("Sanchez");
+            employee.setEmail("miles_morales@mail.com");
+            repository.save(employee);
+            repository.findAll().forEach(System.out::println);
+
+            System.out.println("\nEliminacion empleado\n");
+            repository.delete(6);
+            repository.findAll().forEach(System.out::println);
         }
     }
 }
