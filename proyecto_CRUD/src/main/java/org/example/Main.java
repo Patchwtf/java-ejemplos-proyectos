@@ -12,27 +12,12 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        try (Connection myConn = DataBaseConnection.getIntance()) {
+        System.out.println("Listando todos");
+        Repository<Employee> repository = new EmployeeRepository();
+        repository.findAll().forEach(System.out::println);
 
-            if(myConn.getAutoCommit()) myConn.setAutoCommit(false);
 
-            try {
-                Repository<Employee> repository = new EmployeeRepository(myConn);
-                System.out.println("--------------Incertando cliente------------------");
-                Employee employee = new Employee();
-                employee.setFirst_name("Gwen");
-                employee.setPa_surname("Morales");
-                employee.setMa_surname("Rivera");
-                employee.setEmail("gwanda@mail.com");
-                employee.setSalary(5000.99f);
-                employee.setCurp("GMRI242424");
-                repository.save(employee);
-                myConn.commit();
-            } catch (SQLException e) {
-                myConn.rollback();
-                throw new RuntimeException(e);
-            }
-
-        }
+        System.out.println("########################\nBuscando por ID");
+        System.out.println(repository.getById(2));
     }
 }
