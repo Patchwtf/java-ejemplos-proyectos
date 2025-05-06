@@ -16,7 +16,6 @@ public class Main {
         Repository<Employee> repository = new EmployeeRepository();
         repository.findAll().forEach(System.out::println);
 
-
         System.out.println("########################\nBuscando por ID");
         System.out.println(repository.getById(2));
     }
