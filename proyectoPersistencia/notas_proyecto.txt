@@ -1,0 +1,5 @@
+####Instalacion de APicacion#####
+
+Instalar XAMPP (Paqueteria que contiene los servicios basicos para un servidor, como apache, mySQL y php)
+
+Nota: Tamien se puede con docker-compose.yml pero para efectos practicos resulta beneficioso este.
