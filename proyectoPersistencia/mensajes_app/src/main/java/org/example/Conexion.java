@@ -5,13 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static Connection myConn;
-
     public Conexion() {
     }
-
     public Connection get_connection() throws SQLException {
-        if(myConn == null) myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app", "root", "");
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app", "root", "");
         return myConn;
     };
 

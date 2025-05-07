@@ -2,11 +2,19 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 public class MensajesDAO {
+    private static Conexion myConn;
+
+    private static Connection getInstance() throws SQLException {
+        if(myConn == null) myConn = new Conexion();
+        return myConn.get_connection();
+    }
+
     public static void crearMensajeBD(Mensajes mensaje){
-        Conexion db_connect = new Conexion();
-        try(Connection cnx = db_connect.get_connection();
+        try(Connection cnx = getInstance();
             PreparedStatement myStamt = cnx.prepareStatement("INSERT INTO mensajes (mensaje, autor_mensaje) VALUES (?, ?)");){
             myStamt.setString(1, mensaje.getMensaje());
             myStamt.setString(2, mensaje.getAutor_mensaje());
@@ -18,8 +26,8 @@ public class MensajesDAO {
         }
     }
 
-    public static void leerMensajesBD(){
-
+    public static List<Mensajes> leerMensajesBD(){
+        return null;
     }
 
     public static void borrarMensajesBD(int id_mensaje){
