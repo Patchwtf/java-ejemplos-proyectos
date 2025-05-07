@@ -3,3 +3,8 @@
 Instalar XAMPP (Paqueteria que contiene los servicios basicos para un servidor, como apache, mySQL y php)
 
 Nota: Tamien se puede con docker-compose.yml pero para efectos practicos resulta beneficioso este.
+
+
+/*Proyecto mensajeria*/
+Creacion de BD:
+create table mensajes_app.mensajes( ID_MENSAJE INT(7) AUTO_INCREMENT, MENSAJE VARCHAR(280) NOT NULL, AUTOR_MENSAJE VARCHAR(50) NOT NULL, FECHA_MENSAJE timestamp NOT NULL, PRIMARY KEY(ID_MENSAJE) );
