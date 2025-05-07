@@ -17,7 +17,11 @@ public class MensajeService {
         MensajesDAO.crearMensajeBD(registro);
     }
     public static void listarMensajes(){
+        for(Mensajes msg:MensajesDAO.leerMensajesBD()){
+            System.out.println("Mensaje: " + msg.getMensaje() + "\t|\tAutor: " + msg.getAutor_mensaje());
+        }
 
+        System.out.println(MensajesDAO.leerMensajesBD());
     }
 
     public static void borrarMensajes(){

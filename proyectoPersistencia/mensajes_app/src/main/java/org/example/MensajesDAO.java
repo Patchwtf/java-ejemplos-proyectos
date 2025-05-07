@@ -1,8 +1,8 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.lang.module.ResolutionException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MensajesDAO {
@@ -27,7 +27,22 @@ public class MensajesDAO {
     }
 
     public static List<Mensajes> leerMensajesBD(){
-        return null;
+        try(Connection cnx = getInstance();
+            Statement myStamt = cnx.createStatement();
+            ResultSet myRes = myStamt.executeQuery("SELECT * FROM mensajes");){
+            List<Mensajes> recopilado = new ArrayList<>();
+            while(myRes.next()){
+                Mensajes msg = new Mensajes();
+                msg.setId_mensaje(myRes.getInt("id_mensaje"));
+                msg.setMensaje(myRes.getString("mensaje"));
+                msg.setAutor_mensaje(myRes.getString("autor_mensaje"));
+                msg.setFecha_mensaje(myRes.getString("fecha_mensaje"));
+                recopilado.add(msg);
+            }
+            return recopilado;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void borrarMensajesBD(int id_mensaje){
