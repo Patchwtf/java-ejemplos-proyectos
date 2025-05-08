@@ -50,11 +50,22 @@ public class MensajesDAO {
             PreparedStatement myStamt = cnx.prepareStatement("DELETE FROM mensajes WHERE id_mensaje = ?")){
             myStamt.setInt(1, id_mensaje);
             int row_affeced = myStamt.executeUpdate();
-            System.out.println("Filas afectadas: " + row_affeced);
+            System.out.println("Registros eliminados: " + row_affeced);
         }
     }
 
     public static void actualizarMensajesBD(Mensajes mensaje){
+        try(Connection cnx = getInstance();
+        PreparedStatement myStamt = cnx.prepareStatement("UPDATE mensajes SET mensaje = ?, autor_mensaje = ? WHERE id_mensaje = ?")){
 
+            myStamt.setString(1, mensaje.getMensaje());
+            myStamt.setString(2, mensaje.getAutor_mensaje());
+            myStamt.setInt(3, mensaje.getId_mensaje());
+
+            int row_affeced = myStamt.executeUpdate();
+            System.out.println("Registro actualizado: " + row_affeced);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
