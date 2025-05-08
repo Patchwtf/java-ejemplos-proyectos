@@ -45,8 +45,13 @@ public class MensajesDAO {
         }
     }
 
-    public static void borrarMensajesBD(int id_mensaje){
-
+    public static void borrarMensajesBD(int id_mensaje) throws SQLException {
+        try(Connection cnx = getInstance();
+            PreparedStatement myStamt = cnx.prepareStatement("DELETE FROM mensajes WHERE id_mensaje = ?")){
+            myStamt.setInt(1, id_mensaje);
+            int row_affeced = myStamt.executeUpdate();
+            System.out.println("Filas afectadas: " + row_affeced);
+        }
     }
 
     public static void actualizarMensajesBD(Mensajes mensaje){
