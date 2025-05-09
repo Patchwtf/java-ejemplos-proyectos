@@ -7,16 +7,16 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Gatos {
 
     Dotenv dotEnv = Dotenv.load();
-    int id;
+    String id;
     String url;
     String apiKey = dotEnv.get("API_KEY");
     String image;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

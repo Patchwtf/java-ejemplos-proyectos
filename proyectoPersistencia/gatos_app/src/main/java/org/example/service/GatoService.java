@@ -9,12 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GatoService {
     public static void verGatos() throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-        MediaType mediaType = MediaType.parse("text/plain");
         Request request = new Request.Builder()
                 .url("https://api.thecatapi.com/v1/images/search").get().build();
         Response response = client.newCall(request).execute();
@@ -38,9 +38,35 @@ public class GatoService {
                 Image modificada = fondo.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
                 fondoGato = new ImageIcon(modificada);
             }
+            String menu = "Opciones: "
+                    + "1. Ver otra imagen\n"
+                    + "2. Favorito\n"
+                    + "3. Volver al menú\n";
+
+            ArrayList<String> botones = new ArrayList<>();
+            botones.add("ver otra imagen");
+            botones.add("Favorito");
+            botones.add("volver");
+            String id_gato = String.valueOf(gatos.getId());
+
+            String opcion = JOptionPane.showInputDialog(null, menu, id_gato, JOptionPane.INFORMATION_MESSAGE, fondoGato, botones.toArray(), botones.get(0)).toString();
+            int seleccion = -1;
+            seleccion = botones.indexOf(opcion);
+
+            switch (seleccion) {
+                case 0:
+                    verGatos();
+                    break;
+                case 1:
+                    favoritoGato(gatos);
+                    break;
+                default:
+                    break;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    public static void favoritoGato(Gatos gato){}
 }

@@ -26,7 +26,7 @@ public class Main {
                 case 0:
                     try {
                         GatoService.verGatos();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                     break;
