@@ -1,6 +1,9 @@
 package org.example;
 
+import org.example.service.GatoService;
+
 import javax.swing.*;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +24,11 @@ public class Main {
 
             switch (menuOpcion){
                 case 0:
+                    try {
+                        GatoService.verGatos();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 default:
                     break;
