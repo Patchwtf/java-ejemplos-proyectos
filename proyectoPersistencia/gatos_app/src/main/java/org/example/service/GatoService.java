@@ -33,9 +33,9 @@ public class GatoService {
             image = ImageIO.read(url);
             ImageIcon fondoGato = new ImageIcon(image);
 
-            if(fondoGato.getIconWidth() > 800) {
+            if(fondoGato.getIconHeight() > 600) {
                 Image fondo = fondoGato.getImage();
-                Image modificada = fondo.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+                Image modificada = fondo.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
                 fondoGato = new ImageIcon(modificada);
             }
             String menu = "Opciones: "
