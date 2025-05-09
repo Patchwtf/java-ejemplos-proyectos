@@ -21,9 +21,9 @@
             <version>5.0.0-alpha.14</version>
         </dependency>
         <dependency>
-            <groupId>com.github.shyiko.dotenv</groupId>
-            <artifactId>dotenv</artifactId>
-            <version>0.1.1</version>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
