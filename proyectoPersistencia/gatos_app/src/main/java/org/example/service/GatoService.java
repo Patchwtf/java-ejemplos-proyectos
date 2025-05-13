@@ -93,9 +93,8 @@ public class GatoService {
     public static void verFavoritos() {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder().url("https://api.thecatapi.com/v1/favourites")
-                .get().addHeader("x-api-key", "live_vGDXnAkHoBM447qf84V8Q880fJHIxuoMNyey12vtafBArOH9ZM1FfrF1537STZtS")
+                .get().addHeader("x-api-key", new Gatos().getApiKey())
                 .addHeader("Content-Type", "application/json")
                 .build();
 
@@ -120,12 +119,12 @@ public class GatoService {
                     }
                     String menu = "Opciones: "
                             + "1. Ver otro favorito\n"
-                            + "2. Eliminar\n"
+                            + "2. Eliminar de favoritos\n"
                             + "3. Volver al menú\n";
 
                     ArrayList<String> botones = new ArrayList<>();
                     botones.add("Ver otro favorito");
-                    botones.add("Favorito");
+                    botones.add("Favorito favorito");
                     botones.add("volver");
                     String id_gato = String.valueOf(gatoFav.getId());
 
@@ -153,5 +152,21 @@ public class GatoService {
         }
     }
 
-    public static void eliminarFavorito(GatosFav gatoFav) {}
+    public static void eliminarFavorito(GatosFav gatoFav) {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url("https://api.thecatapi.com/v1/favourites/" + gatoFav.getId())
+                .method("DELETE", body)
+                .addHeader("x-api-key", gatoFav.getApiKey())
+                .addHeader("Content-Type", "application/json")
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
