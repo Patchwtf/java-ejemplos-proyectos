@@ -13,8 +13,9 @@ public class Main {
         int opcionMenu = -1;
         ArrayList<String> botones = new ArrayList<>();
         botones.add("1. Ver Gatitos");
-        botones.add("2. Salir");
-
+        botones.add("2. Ver Favoritos");
+        botones.add("3. Salir");
+        GatoService.verFavoritos();
         do{
 
             String opcion = JOptionPane.showInputDialog(null, "Gatitos Java", "Menu Principal", JOptionPane.INFORMATION_MESSAGE,
@@ -29,6 +30,9 @@ public class Main {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
+                    break;
+                case 1:
+                    GatoService.verFavoritos();
                     break;
                 default:
                     break;

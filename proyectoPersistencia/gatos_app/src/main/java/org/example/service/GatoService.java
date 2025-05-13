@@ -1,8 +1,11 @@
 package org.example.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import okhttp3.*;
 import org.example.model.Gatos;
+import org.example.model.GatosFav;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,6 +13,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GatoService {
     public static void verGatos() throws IOException {
@@ -44,7 +48,7 @@ public class GatoService {
                     + "3. Volver al menú\n";
 
             ArrayList<String> botones = new ArrayList<>();
-            botones.add("ver otra imagen");
+            botones.add("Ver otra imagen");
             botones.add("Favorito");
             botones.add("volver");
             String id_gato = String.valueOf(gatos.getId());
@@ -83,6 +87,27 @@ public class GatoService {
             Response response = client.newCall(request).execute();
             System.out.println(response);
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void verFavoritos() {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder().url("https://api.thecatapi.com/v1/favourites")
+                .get().addHeader("x-api-key", "live_vGDXnAkHoBM447qf84V8Q880fJHIxuoMNyey12vtafBArOH9ZM1FfrF1537STZtS")
+                .addHeader("Content-Type", "application/json")
+                .build();
+
+        try (Response response = client.newCall(request).execute()){
+            String elJson = response.body().string();
+            GatosFav[] gatosFavArray = new Gson().fromJson(elJson, GatosFav[].class);
+            if(gatosFavArray.length > 0) {
+                int indice = new Random().nextInt(gatosFavArray.length);
+                GatosFav gatoFav = gatosFavArray[indice];
+            };
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
