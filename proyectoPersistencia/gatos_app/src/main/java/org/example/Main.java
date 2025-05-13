@@ -15,7 +15,6 @@ public class Main {
         botones.add("1. Ver Gatitos");
         botones.add("2. Ver Favoritos");
         botones.add("3. Salir");
-        GatoService.verFavoritos();
         do{
 
             String opcion = JOptionPane.showInputDialog(null, "Gatitos Java", "Menu Principal", JOptionPane.INFORMATION_MESSAGE,

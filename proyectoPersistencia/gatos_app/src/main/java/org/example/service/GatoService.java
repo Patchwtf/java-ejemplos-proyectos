@@ -85,7 +85,6 @@ public class GatoService {
                     .addHeader("Content-Type", "application/json")
                     .build();
             Response response = client.newCall(request).execute();
-            System.out.println(response);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -106,9 +105,53 @@ public class GatoService {
             if(gatosFavArray.length > 0) {
                 int indice = new Random().nextInt(gatosFavArray.length);
                 GatosFav gatoFav = gatosFavArray[indice];
+
+                //Redimensionar imagen
+                Image image = null;
+                try{
+                    URL url = new URL(gatoFav.getImage().getUrl());
+                    image = ImageIO.read(url);
+                    ImageIcon fondoGato = new ImageIcon(image);
+
+                    if(fondoGato.getIconHeight() > 600) {
+                        Image fondo = fondoGato.getImage();
+                        Image modificada = fondo.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+                        fondoGato = new ImageIcon(modificada);
+                    }
+                    String menu = "Opciones: "
+                            + "1. Ver otro favorito\n"
+                            + "2. Eliminar\n"
+                            + "3. Volver al menú\n";
+
+                    ArrayList<String> botones = new ArrayList<>();
+                    botones.add("Ver otro favorito");
+                    botones.add("Favorito");
+                    botones.add("volver");
+                    String id_gato = String.valueOf(gatoFav.getId());
+
+                    String opcion = JOptionPane.showInputDialog(null, menu, id_gato, JOptionPane.INFORMATION_MESSAGE, fondoGato, botones.toArray(), botones.get(0)).toString();
+                    int seleccion = -1;
+                    seleccion = botones.indexOf(opcion);
+
+                    switch (seleccion) {
+                        case 0:
+                            verFavoritos();
+                            break;
+                        case 1:
+                            eliminarFavorito(gatoFav);
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             };
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static void eliminarFavorito(GatosFav gatoFav) {}
 }
