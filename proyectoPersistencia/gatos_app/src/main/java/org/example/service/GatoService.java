@@ -68,5 +68,22 @@ public class GatoService {
         }
     }
 
-    public static void favoritoGato(Gatos gato){}
+    public static void favoritoGato(Gatos gato){
+        try{
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n    \"image_id\":\"" + gato.getId() + "\"\r\n}");
+            Request request = new Request.Builder()
+                    .url("https://api.thecatapi.com/v1/favourites")
+                    .method("POST", body)
+                    .addHeader("x-api-key", gato.getApiKey())
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = client.newCall(request).execute();
+            System.out.println(response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
