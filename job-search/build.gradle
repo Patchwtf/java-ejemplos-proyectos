@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'comm.platzi'
@@ -7,10 +8,22 @@ version '0.1.0'
 
 sourceCompatibility = 1.8
 
+application{
+    mainClassName = "com.platzi.jobsearch.JobSearch"
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.jcommander/jcommander
+    runtimeOnly("org.jcommander:jcommander:2.0")
+    // https://mvnrepository.com/artifact/com.beust/jcommander
+    implementation("com.beust:jcommander:1.82")
+    // https://mvnrepository.com/artifact/io.github.openfeign/feign-core
+    implementation("io.github.openfeign:feign-core:13.6")
+    // https://mvnrepository.com/artifact/io.github.openfeign/feign-gson
+    implementation("io.github.openfeign:feign-gson:13.6")
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
