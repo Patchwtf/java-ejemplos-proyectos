@@ -21,8 +21,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	runtimeOnly("org.postgresql:postgresql")
-	implementation ("org.mapstruct:mapstruct")
-	annotationProcessor ("org.mapstruct:mapstruct-processor")
+	implementation ("org.mapstruct:mapstruct:1.3.1.Final")
+	annotationProcessor ("org.mapstruct:mapstruct-processor:1.3.1.Final")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
